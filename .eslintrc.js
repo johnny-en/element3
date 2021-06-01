@@ -1,27 +1,36 @@
 module.exports = {
   root: true,
   env: {
+    node: true,
     browser: true,
     es2020: true,
-    node: true,
     jest: true
   },
-  globals: {
-    ga: true,
-    chrome: true
-  },
-  extends: ['plugin:vue/essential', 'standard', 'prettier'],
+  extends: [
+    'plugin:vue/vue3-essential',
+    'eslint:recommended',
+    '@vue/typescript/recommended',
+    '@vue/prettier',
+    '@vue/prettier/@typescript-eslint'
+  ],
   parserOptions: {
-    ecmaVersion: 12,
-    sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true
-    }
+    ecmaVersion: 2020
   },
-  plugins: ['vue', 'prettier'],
   rules: {
-    'prettier/prettier': ['error'],
-    'no-case-declarations': ['off'],
-    'vue/no-use-v-if-with-v-for': ['off']
-  }
+    'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
+    '@typescript-eslint/no-var-requires': 'off',
+    '@typescript-eslint/no-empty-function': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/explicit-module-boundary-types': 'off'
+  },
+  overrides: [
+    {
+      // enable the rule specifically for TypeScript files
+      files: ['*.ts', '*.tsx'],
+      rules: {
+        '@typescript-eslint/explicit-module-boundary-types': 'warn'
+      }
+    }
+  ]
 }
